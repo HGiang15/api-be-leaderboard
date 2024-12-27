@@ -1,0 +1,14 @@
+docker cp B:\HTKDTM\leaderboard\backend\student_management.db superset_app:/app/student_management.db
+
+docker exec -it superset_app bash
+ls /app
+
+
+superset shell
+
+from superset import db
+from superset.models.core import Database
+
+sqlite_db = Database(database_name="student_management_2", sqlalchemy_uri="sqlite:////app/student_management.db")
+db.session.add(sqlite_db)
+db.session.commit()
